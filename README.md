@@ -46,7 +46,7 @@ A **QALab Shop** egy modern e-kereskedelmi demó alkalmazás, amely Next.js 15 t
 #### 1. Repository klónozása
 ```bash
 git clone <repository-url>
-cd qalab-learning-app
+cd qalab-shop-training
 ```
 
 #### 2. Függőségek telepítése
