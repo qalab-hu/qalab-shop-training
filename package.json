@@ -20,13 +20,13 @@
     "bcryptjs": "^3.0.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "dotenv": "^17.2.2",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.544.0",
     "next": "^15.5.3",
     "prisma": "^6.16.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "sqlite3": "^5.1.7",
     "tailwind-merge": "^3.3.1",
     "zod": "^4.1.8"
   },
@@ -44,8 +44,5 @@
     "eslint-config-next": "^15.5.2",
     "tailwindcss": "^4",
     "typescript": "^5"
-  },
-  "prisma": {
-    "seed": "node prisma/seed.js"
   }
 }
