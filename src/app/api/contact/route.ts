@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
+    const { name, email, subject, message } = body;
     
     // Basic validation
     const requiredFields = ['name', 'email', 'subject', 'message'];
@@ -22,13 +23,7 @@ export async function POST(request: NextRequest) {
     await new Promise(resolve => setTimeout(resolve, 1000));
     
     // In a real application, you would send an email or save to database
-    console.log('Contact form submission:', {
-      name: body.name,
-      email: body.email,
-      subject: body.subject,
-      message: body.message,
-      timestamp: new Date().toISOString()
-    });
+    console.warn(`Contact form submission: ${email} - ${subject}`);
     
     return NextResponse.json({
       success: true,

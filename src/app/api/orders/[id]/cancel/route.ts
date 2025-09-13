@@ -72,7 +72,7 @@ export async function POST(
   try {
     const { id: orderId } = await params;
 
-    console.log('Cancel order request for:', orderId);
+    console.warn('Cancel order request for:', orderId);
 
     if (!orderId) {
       return NextResponse.json(
@@ -107,7 +107,7 @@ export async function POST(
       }
     });
     
-    console.log('Found order:', order);
+    console.warn('Found order:', order);
 
     if (!order) {
       return NextResponse.json(

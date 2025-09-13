@@ -53,8 +53,8 @@ export default function ProfilePage() {
       } else {
         router.push('/login');
       }
-    } catch (error) {
-      console.error('Auth check failed:', error);
+    } catch (_error) {
+      console.error('Auth check failed:', _error);
       router.push('/login');
     } finally {
       setIsLoading(false);
@@ -112,7 +112,7 @@ export default function ProfilePage() {
         const error = await response.json();
         setMessage(error.error || 'Failed to update profile');
       }
-    } catch (error) {
+    } catch (_error) {
       setMessage('Network error. Please try again.');
     }
   };

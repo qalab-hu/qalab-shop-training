@@ -56,7 +56,7 @@ export default function RegisterPage() {
       } else {
         setMessage(result.error || result.message || 'Registration failed');
       }
-    } catch (error) {
+    } catch (_error) {
       setMessage('Network error. Please try again.');
     } finally {
       setIsLoading(false);

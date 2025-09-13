@@ -21,7 +21,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ 
   isLoggedIn: propIsLoggedIn = false,
-  userName: propUserName
+  userName: _propUserName
 }) => {
   const { getCartItemsCount } = useCart();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -46,7 +46,7 @@ const Header: React.FC<HeaderProps> = ({
         setUser(null);
         setIsLoggedIn(false);
       }
-    } catch (error) {
+    } catch (_error) {
       setUser(null);
       setIsLoggedIn(false);
     }

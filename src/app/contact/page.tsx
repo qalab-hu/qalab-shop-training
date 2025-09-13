@@ -70,7 +70,7 @@ export default function ContactPage() {
       } else {
         setSubmitMessage(result.message || 'Failed to send message');
       }
-    } catch (error) {
+    } catch (_error) {
       setSubmitMessage('Network error. Please try again.');
     } finally {
       setIsLoading(false);

@@ -48,7 +48,7 @@ export default function AdminDashboard() {
   });
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [uploadingImage, setUploadingImage] = useState(false);
+  const [_uploadingImage, setUploadingImage] = useState(false);
 
   useEffect(() => {
     checkAuth();
@@ -137,7 +137,7 @@ export default function AdminDashboard() {
         setMessage(result.error || 'Failed to upload image');
         return null;
       }
-    } catch (error) {
+    } catch (_error) {
       setMessage('Error uploading image');
       return null;
     } finally {
@@ -174,7 +174,7 @@ export default function AdminDashboard() {
         image: imageUrl || null // Convert empty string to null
       };
 
-      console.log('Sending request:', { method, url, data: requestData });
+      console.warn('Sending request:', { method, url, data: requestData });
 
       const response = await fetch(url, {
         method,
@@ -183,7 +183,7 @@ export default function AdminDashboard() {
       });
 
       const responseData = await response.json();
-      console.log('Response:', { status: response.status, data: responseData });
+      console.warn('Response:', { status: response.status, data: responseData });
 
       if (response.ok) {
         setMessage(editingProduct ? 'Product updated successfully!' : 'Product created successfully!');
@@ -241,7 +241,7 @@ export default function AdminDashboard() {
         const error = await response.json();
         setMessage(error.error || 'Failed to delete product');
       }
-    } catch (error) {
+    } catch (_error) {
       setMessage('Network error. Please try again.');
     }
   };

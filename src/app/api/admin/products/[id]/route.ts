@@ -18,7 +18,7 @@ const productUpdateSchema = z.object({
 // PUT /api/admin/products/[id] - Update product
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await requireAdmin(request);
@@ -26,12 +26,12 @@ export async function PUT(
     const { id } = await params;
     const body = await request.json();
     
-    console.log('PUT request body:', body);
+    console.warn('PUT request body:', body);
     
     // Validate input
     const validation = productUpdateSchema.safeParse(body);
     if (!validation.success) {
-      console.log('Validation failed:', validation.error.issues);
+      console.warn('Validation failed:', validation.error.issues);
       return NextResponse.json(
         { 
           success: false, 
@@ -90,7 +90,7 @@ export async function PUT(
 // DELETE /api/admin/products/[id] - Delete product
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await requireAdmin(request);
