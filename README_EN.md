@@ -53,7 +53,7 @@ This application serves as a comprehensive testing playground for QA engineers l
 1. Clone the repository:
 ```bash
 git clone <repository-url>
-cd qalab-learning-app
+cd qalab-shop-training
 ```
 
 2. Install dependencies:
