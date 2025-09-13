@@ -3,6 +3,15 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  
+  /* Egyedi színváltozók - Itt tudsz bármilyen színt definiálni */
+  --custom-gray-light: #f0f0f0;  /* Helyett #f3f4f6 */
+  --custom-gray-medium: #9ca3af;
+  --custom-gray-dark: #4b5563;
+  --custom-primary: #3b82f6;
+  --custom-success: #22c55e;
+  --custom-warning: #f59e0b;
+  --custom-error: #ef4444;
 }
 
 @theme inline {
@@ -15,7 +24,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground: #f3f4f6;  /* Sötétebb, jobban látható szín */
   }
 }
 
