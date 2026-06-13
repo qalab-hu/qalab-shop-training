@@ -34,44 +34,93 @@ A **QALab Shop** egy modern e-kereskedelmi demó alkalmazás, amely Next.js 15 t
 ---
 
 ## 💻 Telepítés
+### Ajánlott — Docker Compose (with-docker branch)
 
-### Előfeltételek
+Ez a repó `with-docker` branch-én tartalmaz egy komplett Docker Compose konfigurációt (PostgreSQL + app). Ha konténerizált környezetet szeretnél, ez a javasolt, elsődleges indítási mód — nincs szükség a lokális előkészítő lépésekre.
+
+Gyors indítás:
+
+```bash
+# válts a docker branch-re
+git checkout with-docker
+
+# build és indítás (első indításnál eltarthat egy ideig)
+docker compose up --build -d
+
+# nézd a konténerek állapotát
+docker compose ps
+```
+
+Leállítás (adatok megtartásával):
+
+```bash
+docker compose down
+```
+
+Leállítás és volume törlése (adatok eltávolítása):
+
+```bash
+docker compose down -v
+```
+
+Hozzáférés az alkalmazáshoz: http://localhost:3000
+
+Adatbázis elérése (lokálisan vagy GUI klienssel):
+
+- Host: `localhost`
+- Port: `5432`
+- Database: `qalab_shop`
+- User: `qalab`
+- Password: `qalab_secret`
+
+> Megjegyzés: a Docker setup automatikusan futtatja a migrációkat és a seed-et egy `migrate` szolgáltatáson keresztül.
+
+---
+
+### Opcionális — Lokális fejlesztés (ha nem Dockerrel dolgozol)
+
+#### Előfeltételek
 
 - **Node.js** 18+ verzió
-- **npm**, **yarn** vagy **pnpm** csomagkezelő
-- **Git** verziókezelő
+- **npm**, **yarn** vagy **pnpm**
+- **Git**
 
-### Lépésről lépésre telepítés
+#### Lépésről lépésre (lokálisan)
 
-#### 1. Repository klónozása
+1. Repository klónozása
+
 ```bash
 git clone <repository-url>
 cd qalab-shop-training
 ```
 
-#### 2. Függőségek telepítése
+2. Függőségek telepítése
+
 ```bash
 npm install
 ```
 
-#### 3. Adatbázis inicializálása
+3. Adatbázis inicializálása
+
 ```bash
-# Prisma séma alkalmazása
+# SQLite esetén (default a main branch-en)
 npx prisma db push
 
 # Minta adatok betöltése
 npm run db:seed
 ```
 
-#### 4. Fejlesztői szerver indítása
+4. Fejlesztői szerver indítása
+
 ```bash
 npm run dev
 ```
 
-#### 5. Böngészőben megnyitás
-Nyisd meg a [http://localhost:3000](http://localhost:3000) címet a böngésződben.
+5. Böngészőben megnyitás
 
-### Production Build
+Nyisd meg a [http://localhost:3000](http://localhost:3000) címet.
+
+### Production Build (lokális)
 
 ```bash
 # Build létrehozása
@@ -80,7 +129,52 @@ npm run build
 # Production szerver indítása
 npm start
 ```
+ 
+---
 
+## 🐳 Docker Compose (PostgreSQL + App)
+
+Ez a repó `with-docker` branch-én tartalmaz egy `docker-compose.yml`-t, ami PostgreSQL-t és a Next.js alkalmazást indítja.
+
+Gyors indítás (a `migrate` service automatikusan lefuttatja a migrációkat és a seed-et):
+
+```bash
+# build és indítás (első indításnál eltarthat egy ideig)
+docker compose up --build -d
+
+# nézd a konténerek állapotát
+docker compose ps
+```
+
+Leállítás (adatok megtartásával):
+
+```bash
+docker compose down
+```
+
+Leállítás és volume törlése (adatok eltávolítása):
+
+```bash
+docker compose down -v
+```
+
+Hozzáférés az alkalmazáshoz: http://localhost:3000
+
+Adatbázis elérése (lokálisan vagy GUI klienssel):
+
+- Host: `localhost`
+- Port: `5432`
+- Database: `qalab_shop`
+- User: `qalab`
+- Password: `qalab_secret`
+
+Megjegyzés: ha a `main` branch-et használod, az alapértelmezett fejlesztői beállítás SQLite-ot használ. A Docker-setup a `with-docker` branch-en van — ha vissza akarod állítani az eredeti file-alapú DB-t, válts a `main` branch-re:
+
+```bash
+git checkout main
+```
+
+---
 ---
 
 ## 🎮 Használat
