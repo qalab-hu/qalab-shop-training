@@ -1,0 +1,5 @@
+# Ensure shell scripts use LF line endings on checkout
+scripts/* text eol=lf
+
+# Keep lockfiles as-is
+package-lock.json binary
