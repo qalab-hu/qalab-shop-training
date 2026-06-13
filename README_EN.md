@@ -29,39 +29,67 @@ This application serves as a comprehensive testing playground for QA engineers l
 - ✅ Buttons (various states)
 - ✅ Navigation menus
 - ✅ Modal dialogs
-- ✅ Loading states
-- ✅ Error handling
-
-## 🛠 Technology Stack
-
-- **Frontend**: Next.js 15 with TypeScript
-- **Database**: SQLite with Prisma ORM
-- **Authentication**: JWT tokens with bcrypt password hashing
-- **Styling**: Tailwind CSS
-- **Icons**: Heroicons
-- **API**: Next.js API Routes with validation
-- **Development**: ESLint, TypeScript strict mode
-
 ## 📋 Getting Started
 
-### Prerequisites
-- Node.js 18+ 
+### Recommended — Docker Compose (with-docker branch)
+
+The `with-docker` branch includes a full Docker Compose setup (PostgreSQL + Next.js). This is the recommended way to run the project for demos or CI. The `migrate` service runs migrations and seeds automatically.
+
+```bash
+# switch to the Docker-focused branch
+git checkout with-docker
+
+# build and start the stack (may take a moment on first run)
+docker compose up --build -d
+
+# check container status
+docker compose ps
+```
+
+Stop (keep data):
+
+```bash
+docker compose down
+```
+
+Stop and remove volumes (delete DB data):
+
+```bash
+docker compose down -v
+```
+
+App URL: http://localhost:3000
+
+Database connection (for GUI clients or psql):
+
+- Host: `localhost`
+- Port: `5432`
+- Database: `qalab_shop`
+- User: `qalab`
+- Password: `qalab_secret`
+
+> Note: If you prefer local development without Docker, see the optional instructions below.
+
+### Optional — Local development (main branch uses SQLite by default)
+
+Prerequisites:
+
+- Node.js 18+
 - npm, yarn, or pnpm
 
-### Installation
+Steps (local):
 
-1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd qalab-shop-training
-```
-
-2. Install dependencies:
-```bash
+git checkout main
 npm install
+
+# For SQLite (default on main branch)
+3. Initialize database:
+npm run db:seed
+npm run dev
 ```
 
-3. Initialize database:
+Open http://localhost:3000
 ```bash
 npx prisma db push
 npm run db:seed
