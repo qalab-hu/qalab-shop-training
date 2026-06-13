@@ -17,6 +17,24 @@ services:
       timeout: 5s
       retries: 10
 
+  migrate:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: builder
+    container_name: qalab-shop-migrate
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-qalab}:${POSTGRES_PASSWORD:-qalab_secret}@db:5432/${POSTGRES_DB:-qalab_shop}
+    command: >
+      sh -c "
+        node ./node_modules/prisma/build/index.js migrate deploy &&
+        node ./node_modules/prisma/build/index.js db seed || echo 'Seed skipped (data may already exist)'
+      "
+    restart: "no"
+
   app:
     build:
       context: .
@@ -26,6 +44,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER:-qalab}:${POSTGRES_PASSWORD:-qalab_secret}@db:5432/${POSTGRES_DB:-qalab_shop}
       JWT_SECRET: ${JWT_SECRET:-your-super-secret-jwt-key-replace-in-production}
