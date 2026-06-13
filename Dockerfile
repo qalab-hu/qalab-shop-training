@@ -36,6 +36,8 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 COPY scripts/docker-entrypoint.sh ./docker-entrypoint.sh
+# Ensure any CRLF bytes are removed inside the image so the script is executable on Linux
+RUN sed -i 's/\r$//' ./docker-entrypoint.sh
 RUN chmod +x ./docker-entrypoint.sh
 
 USER nextjs
